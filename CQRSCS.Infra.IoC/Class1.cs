@@ -1,0 +1,6 @@
+﻿namespace CQRSCS.Infra.IoC;
+
+public class Class1
+{
+
+}
