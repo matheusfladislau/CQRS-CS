@@ -1,5 +1,3 @@
-using System;
-
 namespace CQRSCS.Domain.Validation; 
 
 public class DomainEntityValidation : Exception  {
@@ -8,7 +6,7 @@ public class DomainEntityValidation : Exception  {
 
     public static void When(bool hasError, string error) {
         if (hasError) {
-            throw new DomainExceptionValidation(error);
+            throw new DomainEntityValidation(error);
         }
     }
 }
