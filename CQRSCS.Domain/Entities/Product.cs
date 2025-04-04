@@ -1,12 +1,10 @@
-using System;
-using CRQS.Domain.Validation;
+using CQRSCS.Domain.Validation;
 
 namespace CQRSCS.Domain.Entities; 
 
 public sealed class Product : Entity {
     public Product(int id, string name, string description,
             decimal price, int stock) {
-
         ValidateId(id);
         ValidateName(name);
         ValidateDescription(description);
@@ -19,16 +17,13 @@ public sealed class Product : Entity {
         this.Price = price;
         this.Stock = stock;
     }
-
     public Product(string name, string description,
             decimal price, int stock) {
-
         ValidateName(name);
         ValidateDescription(description);
         ValidatePrice(price);
         ValidateStock(stock);
 
-        this.Id = id;
         this.Name = name;
         this.Description = description;
         this.Price = price;
@@ -40,42 +35,45 @@ public sealed class Product : Entity {
     public decimal Price { get; private set; }
     public int Stock { get; private set; }
 
-    
+
     public void Update(string name, string description,
             decimal price, int stock) {
-
         ValidateName(name);
         ValidateDescription(description);
         ValidatePrice(price);
         ValidateStock(stock);
 
-        this.Id = id;
         this.Name = name;
         this.Description = description;
         this.Price = price;
         this.Stock = stock;
     }
 
+    private void ValidateId(int id) {
+        DomainEntityValidation.When(id < 0,
+                "Error: id must be positive.");
+    }
+
     private void ValidateName(string name) {
-        DomainExceptionValidation.When(string.IsNullOrEmpty(name),
+        DomainEntityValidation.When(string.IsNullOrEmpty(name),
                 "Error: name is required.");
     }
 
     private void ValidateDescription(string description) {
-        DomainExceptionValidation.When(string.IsNullOrEmpty(description),
+        DomainEntityValidation.When(string.IsNullOrEmpty(description),
                 "Error: description is required.");
 
-        DomainExceptionValidation.Any(description.Length > 250,
+        DomainEntityValidation.When(description.Length > 250,
                 "Error: description is too long. Maximum 250 characters.");
     }
 
     private void ValidatePrice(decimal price) {
-        DomainExceptionValidation.When(price < 0,
+        DomainEntityValidation.When(price < 0,
                 "Error: price must be positive.");
     }
 
-    private void ValidatePrice(decimal stock) {
-        DomainExceptionValidation.When(stock < 0,
+    private void ValidateStock(decimal stock) {
+        DomainEntityValidation.When(stock < 0,
                 "Error: stock must be positive.");
     }
 }
