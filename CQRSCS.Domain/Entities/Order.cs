@@ -28,7 +28,7 @@ public sealed class Order : Entity {
     public int CustomerId { get; set; }
     public Customer Customer { get; set; }
 
-    public ICollection<Order_Product> OrderProducts { get; set; } 
+    public ICollection<OrderProduct> OrderProducts { get; set; } 
 
     public void Update(DateTime? date, OrderStatus status) {
         ValidateDate(date);

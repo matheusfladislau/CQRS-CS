@@ -1,8 +1,9 @@
-﻿using CQRSCS.Domain.Validation;
+﻿
+using CQRSCS.Domain.Validation;
 
 namespace CQRSCS.Domain.Entities; 
-public class Order_Product {
-    public Order_Product(int quantity) {
+public class OrderProduct {
+    public OrderProduct(int quantity) {
         ValidateQuantity(quantity);
 
         this.Quantity = quantity;

@@ -35,7 +35,7 @@ public sealed class Product : Entity {
     public decimal Price { get; private set; }
     public int Stock { get; private set; }
 
-    public ICollection<Order_Product> OrderProducts { get; set; } 
+    public ICollection<OrderProduct> OrderProducts { get; set; } 
 
     public void Update(string name, string description,
             decimal price, int stock) {
