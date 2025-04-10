@@ -4,31 +4,31 @@ using CQRSCS.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace CQRSCS.Infra.Data.Repositories; 
-public class Order_ProductsRepository : IOrder_ProductsRepository {
+public class OrderProductsRepository : IOrderProductsRepository {
     private readonly ApplicationDbContext _context;
-    public Order_ProductsRepository(ApplicationDbContext context) {
+    public OrderProductsRepository(ApplicationDbContext context) {
         this._context = context;
     }
 
-    public async Task<Order_Product> AddAsync(Order_Product orderProduct) {
+    public async Task<OrderProduct> AddAsync(OrderProduct orderProduct) {
         _context.Add(orderProduct);
         await _context.SaveChangesAsync();
         return orderProduct;
     }
 
-    public async Task<IEnumerable<Order_Product>> GetProductsByOrderIdAsync(int? orderId) {
+    public async Task<IEnumerable<OrderProduct>> GetProductsByOrderIdAsync(int? orderId) {
         return await _context.Order_Products
             .Where(x => x.OrderId == orderId)
             .ToListAsync();
     }
 
-    public async Task<Order_Product> RemoveAsync(Order_Product orderProduct) {
+    public async Task<OrderProduct> RemoveAsync(OrderProduct orderProduct) {
         _context.Remove(orderProduct);
         await _context.SaveChangesAsync();
         return orderProduct;
     }
 
-    public async Task<Order_Product> UpdateQuantityAsync(Order_Product orderProduct) {
+    public async Task<OrderProduct> UpdateQuantityAsync(OrderProduct orderProduct) {
         var order = await _context.Order_Products
                     .Where(x => x.ProductId == orderProduct.ProductId
                              && x.OrderId == orderProduct.OrderId)
