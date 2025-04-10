@@ -16,7 +16,7 @@ public static class DependencyInjection {
             b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
         services.AddScoped<ICustomerRepository, CustomerRepository>();
-        services.AddScoped<IOrder_ProductsRepository, Order_ProductsRepository>();
+        services.AddScoped<IOrderProductsRepository, OrderProductsRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
 
