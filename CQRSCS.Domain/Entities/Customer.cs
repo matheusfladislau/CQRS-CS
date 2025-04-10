@@ -34,7 +34,8 @@ namespace CQRSCS.Domain.Entities {
         public string Email { get; private set; }
         public DateTime? BirthDate { get; private set; }
 
-        
+        public ICollection<Order> Orders { get; set; }
+
         public void Update(string name, string email,
             DateTime? birthDate) {
 
@@ -56,11 +57,10 @@ namespace CQRSCS.Domain.Entities {
                 "Error: name is required.");
         }
         private void ValidateEmail(string email) {
-            DomainEntityValidation.When(string.IsNullOrEmpty(email),
-                "Error: email is required.");
-
-            DomainEntityValidation.When(!new EmailAddressAttribute().IsValid(email),
-                "Error: email is invalid.");
+            if (!string.IsNullOrEmpty(email)) {
+                DomainEntityValidation.When(!new EmailAddressAttribute().IsValid(email),
+                    "Error: email is invalid.");
+            }
         }
         private void ValidateBirthDate(DateTime? birthDate) {
             DomainEntityValidation.When(birthDate == null,

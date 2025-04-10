@@ -28,6 +28,8 @@ public sealed class Order : Entity {
     public int CustomerId { get; set; }
     public Customer Customer { get; set; }
 
+    public ICollection<Order_Product> OrderProducts { get; set; } 
+
     public void Update(DateTime? date, OrderStatus status) {
         ValidateDate(date);
         ValidateStatus(status);
@@ -35,17 +37,22 @@ public sealed class Order : Entity {
         this.Date = date;
         this.Status = status;
     }
+    public void UpdateStatus(OrderStatus status) {
+        ValidateStatus(status);
+
+        this.Status = status;
+    }
 
     private void ValidateId(int id) {
         DomainEntityValidation.When(id < 0,
-                "Error: Id must be positive.");
+                "Error: id must be positive.");
     }
     private void ValidateDate(DateTime? birthDate) {
         DomainEntityValidation.When(birthDate == null,
-            "Error: birthDate is required.");
+            "Error: birth date is required.");
     }
     private void ValidateStatus(OrderStatus? status) {
         DomainEntityValidation.When(status == null,
-            "Error: birthDate is required.");
+            "Error: status is required.");
     }
 }
