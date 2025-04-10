@@ -2,10 +2,10 @@
 
 namespace CQRSCS.Domain.Interfaces; 
 public interface IProductRepository {
-    Task<IEnumerable<Product>> GetProducts();
-    Task<Product> GetById(int? id);
+    Task<IEnumerable<Product>> GetProductsAsync();
+    Task<Product> GetByIdAsync(int? id);
 
-    Task<Product> Add(Product product);
-    Task<Product> Remove(Product product);
-    Task<Product> Update(Product product);
+    Task<Product> AddAsync(Product product);
+    Task<Product> RemoveAsync(Product product);
+    Task<Product> UpdateAsync(Product product);
 }
