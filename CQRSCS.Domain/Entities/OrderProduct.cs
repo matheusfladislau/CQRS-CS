@@ -3,10 +3,14 @@ using CQRSCS.Domain.Validation;
 
 namespace CQRSCS.Domain.Entities; 
 public class OrderProduct {
-    public OrderProduct(int quantity) {
+    public OrderProduct(int quantity, int productId, int orderId) {
         ValidateQuantity(quantity);
+        ValidateId(productId);
+        ValidateId(orderId);
 
         this.Quantity = quantity;
+        this.ProductId = productId;
+        this.OrderId = orderId;
     }
 
     public int Quantity { get; private set; }

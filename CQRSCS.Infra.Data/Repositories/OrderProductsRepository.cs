@@ -16,6 +16,11 @@ public class OrderProductsRepository : IOrderProductsRepository {
         return orderProduct;
     }
 
+    public async Task<OrderProduct> GetProductOrderByIdsAsync(int? productId, int? orderId) {
+        return await _context.Order_Products
+            .FirstOrDefaultAsync(x => x.ProductId == productId && x.OrderId == orderId);
+    }
+
     public async Task<IEnumerable<OrderProduct>> GetProductsByOrderIdAsync(int? orderId) {
         return await _context.Order_Products
             .Where(x => x.OrderId == orderId)
